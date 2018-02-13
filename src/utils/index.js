@@ -1,25 +1,14 @@
-export const nowTodayInSeconds = () => {
-  const start = new Date()
-  start.setHours(0, 0, 0, 0)
-  return Math.round((Date.now() - start.getTime()) / 1000)
-}
+import differenceInMinutes from 'date-fns/difference_in_minutes'
+
+import { WALK_MINUTES } from '../config'
+
+const WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?q=Helsinki,FI&appid=7d05f32d3baaae6039efc0453838c0b1&units=metric'
+const TRAMS_URL = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
 
 
 
 
-export const timeBetweenTramAndNow = (tramTime, now=nowTodayInSeconds()) => {
-  // !!! Such haxy solutions, don't use in anything real
-  const SECONDS_IN_DAY = 86400
-  let diff = tramTime - now
-
-  // Midnight passing hax thingies
-  if (diff > SECONDS_IN_DAY) {
-    return (tramTime - SECONDS_IN_DAY) - now
-  } else if (diff > SECONDS_IN_DAY / 2 && tramTime > now) {
-    return tramTime - ( now + SECONDS_IN_DAY )
-  }
-  return diff
-}
+export const getNowInSeconds = () => Math.round(Date.now() / 1000)
 
 
 
@@ -39,13 +28,14 @@ export const getJson = url => new Promise(resolve => {
     .then(data => {
       resolve(data)
     })
+    .catch(() => resolve({}))
 })
 
 
 
 
 export const getHslData = query => new Promise(resolve => {
-  fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
+  fetch(TRAMS_URL, {
     method: 'post',
     headers: {
       'Content-Type': 'application/graphql'
@@ -61,6 +51,70 @@ export const getHslData = query => new Promise(resolve => {
       resolve(data)
     })
     .catch(err => {
+      resolve([])
       console.warn(err)
     })
 })
+
+
+
+
+export const getTrams = ( stopId, startTime = getNowInSeconds()) => {
+  return new Promise(resolve => {
+    if (!stopId) return resolve([])
+    getHslData(`
+      {
+        stop(id:"${stopId}"){
+          name
+          gtfsId
+          stoptimesWithoutPatterns(
+            startTime:"${startTime}",
+            timeRange: 18000,
+            numberOfDepartures:4
+          ) {
+            scheduledArrival
+            scheduledDeparture
+            realtimeArrival
+            serviceDay
+            stopHeadsign
+            trip {
+              route {
+                gtfsId
+                longName
+                shortName
+              }
+            }
+          }
+        }
+      }`
+    )
+      .then(res => res.data.stop.stoptimesWithoutPatterns)
+      .then(res => {
+        const now = new Date()
+        resolve(res
+          .map(x => {
+            const arrivalDate = new Date((x.serviceDay + x.realtimeArrival) * 1000)
+            const arrivalInMinutes = differenceInMinutes(arrivalDate, now)
+            const arrival = arrivalInMinutes - WALK_MINUTES
+            return ({
+              arrival,
+              lineName: x.trip.route.shortName,
+            })
+          })
+          .filter(x => x.arrival >= 0)
+        )
+      })
+  })
+
+
+}
+
+
+
+
+
+export const getWeather = () => getJson(WEATHER_URL)
+  .then(res => {
+    if (!res || !res.main || !res.main.temp) return 0
+    return Math.round(res.main.temp)
+  })
