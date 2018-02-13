@@ -1,0 +1,100 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: Raleway, sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+}
+
+#root {
+  /* display: grid; */
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
+  grid-template-areas:
+    '. Weather .'
+    'WhichTramA NextTram WhichTramB'
+    '. Time .';
+}
+
+
+
+
+/* -----------------------------------------------------------------------------
+    GRID
+----------------------------------------------------------------------------- */
+
+#root > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#root > .Weather {
+  grid-area: Weather;
+  width: 100%;
+}
+
+#root > .WhichTram {
+  grid-area: WhichTramA;
+  width: 33.3333%;
+}
+
+#root > .WhichTram + * + .WhichTram {
+  grid-area: WhichTramB;
+  width: 33.3333%;
+}
+
+#root > .NextTram {
+  grid-area: NextTram;
+  width: 33.3333%;
+}
+
+#root > .Time {
+  grid-area: Time;
+  width: 100%;
+}
+
+
+
+
+/* -----------------------------------------------------------------------------
+    Tram row
+----------------------------------------------------------------------------- */
+
+#root > .WhichTram,
+#root > .NextTram {
+  position: relative;
+  font-size: 144px;
+  font-weight: 800;
+  padding-bottom: 40px;
+}
+
+#root > .NextTram > span {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 300;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(60px);
+  text-align: center;
+}
+
+#root > .WhichTram {
+  transition: opacity 400ms ease-in-out;
+  opacity: 0.1;
+}
+
+#root > .WhichTram--active {
+  opacity: 1;
+}
