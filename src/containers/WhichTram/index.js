@@ -8,7 +8,7 @@ const WhichTram = ({ lineName, trams }) => (
         'WhichTram WhichTram--active' :
         'WhichTram'
     }
-    children={ lineName}
+    children={ lineName }
   />
 )
 
