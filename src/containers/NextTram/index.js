@@ -10,11 +10,13 @@ const NextTram = ({ trams }) => {
   )
 
   const minutes = trams[0].arrival || 0
-  const content = minutes < 1 ? 'now' : minutes
+  let content = minutes
+  if (minutes < 2) content = 'now'
+  if (minutes < 1) content = 'hurry'
 
   return (
     <div className="NextTram">
-      { content } { minutes < 1 ? null : <span>min</span> }
+      { content } { minutes < 2 ? null : <span>min</span> }
     </div>
   )
 }

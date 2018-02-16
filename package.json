@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-build": "live-server .",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp package.json build && cp -r node_modules build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
