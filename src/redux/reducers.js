@@ -3,20 +3,20 @@ import {
   SET_WEATHER,
 } from './types'
 
-export const trams = (state=[], action) => {
-  switch(action.type) {
+export const trams = (state = [], { type, payload }) => {
+  switch(type) {
     case SET_TRAMS:
-      return action.payload
+      return payload
 
     default:
       return state
   }
 }
 
-export const weather = (state='0', action) => {
-  switch(action.type) {
+export const weather = (state = 0, { type, payload }) => {
+  switch(type) {
     case SET_WEATHER:
-      return action.payload
+      return payload
 
     default:
       return state
