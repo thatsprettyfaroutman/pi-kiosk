@@ -6,6 +6,7 @@ import {
 import {
   getTrams,
   getWeather,
+  timeout,
 } from '../utils'
 
 import {
@@ -17,10 +18,11 @@ import {
 
 
 export const startPolling = (() => {
-  let pollTimeout = null
+  let polling = false
 
   return async store => {
-    clearTimeout(pollTimeout)
+    if (polling) return
+    polling = true
 
     const arrivals = await Promise.all(TRAM_STOPS.map( x => getTrams(x) ))
     const sortedArrivals = arrivals
@@ -32,8 +34,7 @@ export const startPolling = (() => {
     const weather = await getWeather()
     store.dispatch(setWeather(weather))
 
-    pollTimeout = setTimeout(() => {
-      startPolling(store)
-    }, 60000)
+    await timeout(30000)
+    startPolling(store)
   }
 })()

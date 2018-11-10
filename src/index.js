@@ -29,10 +29,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 )
 
-startPolling(store)
 
-// Attempt to refresh every 12 hours
-pollRefresh(1000 * 60 * 60 * 12)
 
 
 const App = () => (
@@ -50,3 +47,11 @@ ReactDOM.render((
     <App />
   </Provider>
 ), document.getElementById('root'))
+
+
+
+
+startPolling(store)
+
+// Attempt to refresh every 12 hours
+pollRefresh(1000 * 60 * 60 * 12)
