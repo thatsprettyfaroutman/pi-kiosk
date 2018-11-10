@@ -13,31 +13,27 @@ import {
   TRAM_LINES,
 } from '../config'
 
-let pollTimeout = null
 
 
 
+export const startPolling = (() => {
+  let pollTimeout = null
 
-export const startPolling = async store => {
-  clearTimeout(pollTimeout)
+  return async store => {
+    clearTimeout(pollTimeout)
 
+    const arrivals = await Promise.all(TRAM_STOPS.map( x => getTrams(x) ))
+    const sortedArrivals = arrivals
+      .reduce( (res, stopTimes) => [...res, ...stopTimes], [] )
+      .sort( (a, b) => a.arrival - b.arrival )
+      .filter( arrival => TRAM_LINES.includes(arrival.lineName) )
+    store.dispatch(setTrams(sortedArrivals))
 
-  Promise.all([
-    ...TRAM_STOPS.map(x => getTrams(x)),
-    getWeather(),
-  ]).then(res => {
-    const trams = TRAM_STOPS
-      .reduce((r, _, i) => [...r, ...res[i]], [])
-      .sort((a, b) => a.arrival - b.arrival)
-      .filter(x => TRAM_LINES.includes(x.lineName))
-    store.dispatch(setTrams(trams))
-
-    const weather = res[2]
+    const weather = await getWeather()
     store.dispatch(setWeather(weather))
-  })
 
-
-  pollTimeout = setTimeout(() => {
-    startPolling(store)
-  }, 60000)
-}
+    pollTimeout = setTimeout(() => {
+      startPolling(store)
+    }, 60000)
+  }
+})()
