@@ -5,6 +5,9 @@ Customizable time display for Helsinki public transportation system
 Data from [HSL public api](https://dev.hsl.fi/#journeyplanning)
 
 
+![screenshot](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot.png)
+
+
 #### Usage
 
 ```
