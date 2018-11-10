@@ -118,3 +118,19 @@ export const getWeather = () => getJson(WEATHER_URL)
     if (!res || !res.main || !res.main.temp) return 0
     return Math.round(res.main.temp)
   })
+
+
+
+
+export const pollRefresh = ( interval = 10000 ) => {
+  setTimeout(() => {
+    fetch(window.location).then(res => {
+      if (res.status === 200) {
+        window.location = window.location
+        return
+      }
+
+      pollRefresh()
+    })
+  }, interval)
+}

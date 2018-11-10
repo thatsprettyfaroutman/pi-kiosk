@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import * as reducers from './redux/reducers'
 import { startPolling } from './redux/polls'
+import { pollRefresh } from './utils'
 
 import Time from './components/Time'
 
@@ -30,6 +31,8 @@ const store = createStore(
 
 startPolling(store)
 
+// Attempt to refresh every 12 hours
+pollRefresh(1000 * 60 * 60 * 12)
 
 
 const App = () => (

@@ -4,15 +4,11 @@ import {
 } from './actions'
 
 import {
-  getHslData,
-  getJson,
-  timeBetweenTramAndNow,
   getTrams,
   getWeather,
 } from '../utils'
 
 import {
-  WALK_TIME_IN_SECONDS,
   TRAM_STOPS,
   TRAM_LINES,
 } from '../config'
