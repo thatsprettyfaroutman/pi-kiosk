@@ -113,7 +113,7 @@ export const pollRefresh = async ( interval = 10000 ) => {
   for (let i = 0; i < 2; i++) {
     let res = await fetch(window.location)
     if ( res.status === 200 ) {
-      window.location = window.location
+      window.location.reload()
       return
     }
     await timeout(i === 0 ? 1000 : 0)

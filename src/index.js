@@ -1,5 +1,4 @@
 import 'babel-polyfill'
-import 'whatwg-fetch'
 
 import './index.css'
 import React, { Fragment } from 'react'
