@@ -7,6 +7,7 @@ Data from [HSL public api](https://dev.hsl.fi/#journeyplanning)
 
 ![screenshot](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/353799ebc9225fc1b6a1e0b1658b6ba3d1ec583c/screenshot.png)
 
+[Demo](http://trams.herokuapp.com/)
 
 #### Usage
 
