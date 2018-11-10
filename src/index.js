@@ -1,7 +1,7 @@
-import './index.css'
-
+import 'babel-polyfill'
 import 'whatwg-fetch'
 
+import './index.css'
 import React, { Fragment } from 'react'
 import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
