@@ -12,9 +12,10 @@ import { pollRefresh } from './utils'
 
 import Time from './components/Time'
 
-import Weather from './containers/Weather'
+import Temperature from './containers/Temperature'
 import WhichTram from './containers/WhichTram'
 import NextTram from './containers/NextTram'
+import Rain from './containers/Rain'
 
 
 
@@ -33,11 +34,12 @@ const store = createStore(
 
 const App = () => (
   <Fragment>
+    <Rain />
     <Time />
     <WhichTram lineName="9" />
     <NextTram />
     <WhichTram lineName="7" />
-    <Weather />
+    <Temperature />
   </Fragment>
 )
 

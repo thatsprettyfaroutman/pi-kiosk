@@ -1,6 +1,7 @@
 import {
   SET_TRAMS,
-  SET_WEATHER,
+  SET_TEMPERATURE,
+  SET_RAIN,
 } from './types'
 
 export const setTrams = trams => ({
@@ -8,7 +9,12 @@ export const setTrams = trams => ({
   payload: trams,
 })
 
-export const setWeather = weather => ({
-  type: SET_WEATHER,
-  payload: weather,
+export const setTemperature = temp => ({
+  type: SET_TEMPERATURE,
+  payload: temp,
+})
+
+export const setRain = bool => ({
+  type: SET_RAIN,
+  payload: bool,
 })

@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
   setTrams,
-  setWeather,
+  setTemperature,
+  setRain,
 } from './actions'
 
 
@@ -14,12 +15,14 @@ import {
 
 const mapStateToProps = state => ({
   trams: state.trams,
-  weather: state.weather,
+  temperature: state.temperature,
+  rain: state.rain,
 })
 
 const mapDispatchToProps = dispatch => ({
   setTrams: trams => dispatch(setTrams(trams)),
-  setWeather: weather => dispatch(setWeather(weather)),
+  setTemperature: temp => dispatch(setTemperature(temp)),
+  setRain: bool => dispatch(setRain(bool)),
 })
 
 

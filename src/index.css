@@ -20,14 +20,14 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 3fr 1fr;
   grid-template-areas:
-    '. Weather .'
+    '. Temperature .'
     'WhichTramA NextTram WhichTramB'
     '. Time .';
 }
 
 
 
-#root > .Weather,
+#root > .Temperature,
 #root > .Time {
   font-weight: 400;
   letter-spacing: 1px;
@@ -47,12 +47,14 @@ body {
   align-items: center;
 }
 
-#root > .Weather {
-  grid-area: Weather;
+#root > .Temperature {
+  position: relative;
+  grid-area: Temperature;
   width: 100%;
 }
 
 #root > .WhichTram {
+  position: relative;
   grid-area: WhichTramA;
   width: 33.3333%;
 }
@@ -63,11 +65,13 @@ body {
 }
 
 #root > .NextTram {
+  position: relative;
   grid-area: NextTram;
   width: 33.3333%;
 }
 
 #root > .Time {
+  position: relative;
   grid-area: Time;
   width: 100%;
 }

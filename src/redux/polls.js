@@ -1,6 +1,7 @@
 import {
   setTrams,
-  setWeather,
+  setTemperature,
+  setRain,
 } from './actions'
 
 import {
@@ -32,8 +33,9 @@ export const startPolling = (() => {
         .filter( arrival => TRAM_LINES.includes(arrival.lineName) )
       store.dispatch(setTrams(sortedArrivals))
 
-      const weather = await getWeather()
-      store.dispatch(setWeather(weather))
+      const { temp, rain } = await getWeather()
+      store.dispatch(setTemperature(temp))
+      store.dispatch(setRain(rain))
 
     } catch (err) {
       console.warn(err)

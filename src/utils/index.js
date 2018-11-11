@@ -91,14 +91,25 @@ export const getTrams = async ( stopId, startTime = getNowInSeconds() ) => {
 
 export const getWeather = async () => {
   const res = await getJson(WEATHER_URL)
-  const temp =
+
+  let temp =
     res &&
     res.main &&
     res.main.temp
 
-  if ( isNaN(parseInt(temp, 10)) ) return '-'
+  if ( isNaN(parseInt(temp, 10)) ) temp = '-'
+  else temp = Math.round(temp)
 
-  return Math.round(temp)
+  const rain =
+    res &&
+    res.weather &&
+    res.weather.main === 'Rain'
+
+
+  return {
+    temp,
+    rain,
+  }
 }
 
 
