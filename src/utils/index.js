@@ -14,8 +14,7 @@ export const getNowInSeconds = () => Math.round(Date.now() / 1000)
 
 export const getJson = async url => {
   const res = await fetch(url)
-  if (res.status !== 200) throw new Error(res.status)
-  return await res.json()
+  if (res.status === 200) return res.json()
 }
 
 
@@ -29,9 +28,7 @@ export const getHslData = async query => {
     },
     body: query,
   })
-
-  if (res.status !== 200) throw new Error(res.status)
-  return await res.json()
+  if (res.status === 200) return res.json()
 }
 
 
@@ -99,7 +96,7 @@ export const getWeather = async () => {
     res.main &&
     res.main.temp
 
-  if ( !temp ) return 0
+  if ( isNaN(parseInt(temp, 10)) ) return '-'
 
   return Math.round(temp)
 }
