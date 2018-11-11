@@ -116,7 +116,7 @@ export const pollRefresh = async ( interval = 10000 ) => {
       window.location.reload()
       return
     }
-    await timeout(i === 0 ? 1000 : 0)
+    await timeout(i === 0 ? 60000 : 0)
   }
 
   pollRefresh(interval)
