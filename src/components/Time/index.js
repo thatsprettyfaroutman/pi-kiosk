@@ -32,7 +32,7 @@ class Time extends Component {
       <div className="Time">
         {
           this.addLeadingZero(time.getHours())
-        }.{
+        }{
           this.addLeadingZero(time.getMinutes())
         }
       </div>

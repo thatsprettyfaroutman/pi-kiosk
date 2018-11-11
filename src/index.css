@@ -7,9 +7,9 @@ body {
   padding: 0;
   background-color: #000;
   color: #fff;
-  font-family: Raleway, sans-serif;
-  font-size: 60px;
-  font-weight: 600;
+  font-family: Poppins, sans-serif;
+  font-size: 50px;
+  font-weight: 700;
 }
 
 #root {
@@ -23,6 +23,14 @@ body {
     '. Weather .'
     'WhichTramA NextTram WhichTramB'
     '. Time .';
+}
+
+
+
+#root > .Weather,
+#root > .Time {
+  font-weight: 400;
+  letter-spacing: 1px;
 }
 
 
@@ -74,16 +82,20 @@ body {
 #root > .WhichTram,
 #root > .NextTram {
   position: relative;
-  font-size: 144px;
+  font-size: 150px;
   font-weight: 800;
-  padding-bottom: 40px;
+}
+
+#root > .NextTram {
+  font-size: 100px;
+  padding-bottom: 25px;
 }
 
 #root > .NextTram > span {
   position: absolute;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 300;
-  top: 50%;
+  top: 40%;
   left: 0;
   right: 0;
   transform: translateY(60px);

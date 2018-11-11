@@ -33,11 +33,11 @@ const store = createStore(
 
 const App = () => (
   <Fragment>
-    <Weather />
+    <Time />
     <WhichTram lineName="9" />
     <NextTram />
     <WhichTram lineName="7" />
-    <Time />
+    <Weather />
   </Fragment>
 )
 
