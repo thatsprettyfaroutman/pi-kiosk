@@ -52,7 +52,7 @@ ReactDOM.render((
 
 
 
-
+// Start data polling
 startPolling(store)
 
 // Attempt to refresh every 12 hours
