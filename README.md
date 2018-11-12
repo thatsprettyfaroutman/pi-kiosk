@@ -26,3 +26,8 @@ export const TRAM_LINES = [ '7', '9' ]
 ![Default view](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot.png)
 
 ![View when raining](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot_rain.gif)
+
+
+#### Todo
+
+* Status for sunny weather
