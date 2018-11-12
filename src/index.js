@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import * as reducers from './redux/reducers'
-import { startPolling } from './redux/polls'
+import pollData from './redux/polls'
 import { pollRefresh } from './utils'
 
 import Time from './components/Time'
@@ -53,7 +53,7 @@ ReactDOM.render((
 
 
 // Start data polling
-startPolling(store)
+pollData(store)
 
 // Attempt to refresh every 12 hours
 pollRefresh(1000 * 60 * 60 * 12)
