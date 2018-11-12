@@ -32,11 +32,14 @@ export const startPolling = (() => {
         .sort( (a, b) => a.arrival - b.arrival )
         .filter( arrival => TRAM_LINES.includes(arrival.lineName) )
       store.dispatch(setTrams(sortedArrivals))
+    } catch (err) {
+      console.warn(err)
+    }
 
+    try {
       const { temp, rain } = await getWeather()
       store.dispatch(setTemperature(temp))
       store.dispatch(setRain(rain))
-
     } catch (err) {
       console.warn(err)
     }
