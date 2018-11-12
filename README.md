@@ -23,4 +23,6 @@ export const TRAM_LINES = [ '7', '9' ]
 
 #### Screenshots
 
-![screenshot](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot.png)
+![Default view](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot.png)
+
+![View when raining](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot_rain.gif)
