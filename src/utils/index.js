@@ -1,7 +1,8 @@
 import differenceInMinutes from 'date-fns/difference_in_minutes'
+import last from 'lodash.last'
 import { WALK_MINUTES } from '../config'
 
-const WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather?q=Helsinki,FI&appid=7d05f32d3baaae6039efc0453838c0b1&units=metric'
+const WEATHER_URL = 'https://cors-anywhere.herokuapp.com/https://en.ilmatieteenlaitos.fi/observation-data?station=100971'
 const TRAMS_URL = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
 
 
@@ -62,13 +63,14 @@ export const getTrams = async ( stopId, startTime = getNowInSeconds() ) => {
     }`
   )
 
+  if ( !res ) throw new Error('No route data')
+
   const stopTimes =
-    res &&
     res.data &&
     res.data.stop &&
     res.data.stop.stoptimesWithoutPatterns
 
-  if ( !stopTimes ) return {}
+  if ( !stopTimes ) throw new Error('Faulty route data')
 
   const now = Date.now()
 
@@ -91,20 +93,21 @@ export const getTrams = async ( stopId, startTime = getNowInSeconds() ) => {
 
 export const getWeather = async () => {
   const res = await getJson(WEATHER_URL)
+  if (!res) {
+    throw new Error('No weather data')
+  }
 
-  let temp =
-    res &&
-    res.main &&
-    res.main.temp
+  const {
+    t2m: tempData,
+    Precipitation1h: rainData,
+  } = res
 
-  if ( isNaN(parseInt(temp, 10)) ) temp = '-'
-  else temp = Math.round(temp)
+  if (!Array.isArray(tempData) || !Array.isArray(rainData)) {
+    throw new Error('Faulty weather data')
+  }
 
-  const rain =
-    res &&
-    res.weather &&
-    res.weather.main === 'Rain'
-
+  const temp = Math.round(last(last(tempData)))
+  const rain = last(last(rainData)) > 0
 
   return {
     temp,
