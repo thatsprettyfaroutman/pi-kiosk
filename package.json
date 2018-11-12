@@ -7,12 +7,14 @@
     "date-fns": "^1.29.0",
     "express": "^4.16.2",
     "live-server": "^1.2.0",
+    "lodash.last": "^3.0.0",
     "react": "^16.6.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-scripts": "^2.1.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
