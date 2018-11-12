@@ -23,7 +23,7 @@ const NextTram = ({ trams }) => {
 
   return (
     <div className="NextTram">
-      { content } { minutes < 2 ? null : <span>min</span> }
+      { content } { minutes < 3 ? null : <span>min</span> }
     </div>
   )
 }
