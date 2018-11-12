@@ -2,9 +2,9 @@
 
 Customizable time display for Helsinki public transportation system
 
-Data from [HSL public api](https://dev.hsl.fi/#journeyplanning)
-
 [Demo](http://trams.herokuapp.com/)
+
+Data from [HSL public api](https://dev.hsl.fi/#journeyplanning)
 
 #### Usage
 
