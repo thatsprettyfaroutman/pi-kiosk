@@ -31,3 +31,5 @@ export const TRAM_LINES = [ '7', '9' ]
 #### Todo
 
 * Status for sunny weather
+* UI for settings (google spreadsheets perhaps)
+
