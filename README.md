@@ -27,6 +27,8 @@ export const TRAM_LINES = [ '7', '9' ]
 
 ![View when raining](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot_rain.gif)
 
+![View when snowing](https://raw.githubusercontent.com/thatsprettyfaroutman/pi-kiosk/master/screenshot_snow.gif)
+
 
 #### Todo
 
